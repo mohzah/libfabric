@@ -264,6 +264,11 @@ sa_sin6:
 	case FI_ADDR_MLX:
 		size = snprintf(buf, *len, "fi_addr_mlx://%p", addr);
 		break;
+    case FI_ADDR_DPDK:
+        // todo dpdk, what is in addr for dpdk?
+        // %p just prints address that pointer is pointing to
+        size = snprintf(buf, *len, "fi_addr_dpdk://%p", addr);
+        break;
 	case FI_ADDR_STR:
 		size = snprintf(buf, *len, "%s", (const char *) addr);
 		break;
@@ -304,6 +309,8 @@ static uint32_t ofi_addr_format(const char *str)
 		return FI_ADDR_BGQ;
 	else if (!strcasecmp(fmt, "fi_addr_mlx"))
 		return FI_ADDR_MLX;
+    else if (!strcasecmp(fmt, "fi_addr_dpdk"))
+        return FI_ADDR_DPDK;
 
 	return FI_FORMAT_UNSPEC;
 }
@@ -439,6 +446,7 @@ int ofi_str_toaddr(const char *str, uint32_t *addr_format,
 	case FI_ADDR_GNI:
 	case FI_ADDR_BGQ:
 	case FI_ADDR_MLX:
+    case FI_ADDR_DPDK;
 	default:
 		return -FI_ENOSYS;
 	}

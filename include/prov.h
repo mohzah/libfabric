@@ -136,6 +136,17 @@ UDP_INI ;
 #  define UDP_INIT NULL
 #endif
 
+#if (HAVE_DPDK) && (HAVE_DPDK_DL)
+#  define DPDK_INI FI_EXT_INI
+#  define DPDK_INIT NULL
+#elif (HAVE_DPDK)
+#  define DPDK_INI INI_SIG(fi_dpdk_ini)
+#  define DPDK_INIT fi_dpdk_ini()
+DPDK_INI ;
+#else
+#  define DPDK_INIT NULL
+#endif
+
 #if (HAVE_RXM) && (HAVE_RXM_DL)
 #  define RXM_INI FI_EXT_INI
 #  define RXM_INIT NULL

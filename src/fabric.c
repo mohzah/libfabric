@@ -440,6 +440,7 @@ libdl_done:
 	ofi_register_provider(BGQ_INIT, NULL);
 	ofi_register_provider(NETDIR_INIT, NULL);
 	ofi_register_provider(RXM_INIT, NULL);
+    ofi_register_provider(DPDK_INIT, NULL);
 
 	{
 		/* TODO: RXD is not stable for now. Disable it by default */
